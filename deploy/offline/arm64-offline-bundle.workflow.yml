@@ -1,0 +1,67 @@
+# Copy this file to .github/workflows/ to enable the GitHub Actions builder.
+name: Build ARM64 offline bundle
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-qemu-action@v3
+        with:
+          platforms: arm64
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build web ARM64 image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          platforms: linux/arm64
+          tags: team-wiki:arm64
+          outputs: type=docker,dest=/tmp/team-wiki-arm64.tar
+          cache-from: type=gha,scope=web-arm64
+          cache-to: type=gha,mode=max,scope=web-arm64
+
+      - name: Build compiler ARM64 image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: compiler-service/Dockerfile
+          platforms: linux/arm64
+          tags: team-wiki-compiler:arm64
+          outputs: type=docker,dest=/tmp/team-wiki-compiler-arm64.tar
+          cache-from: type=gha,scope=compiler-arm64
+          cache-to: type=gha,mode=max,scope=compiler-arm64
+
+      - name: Assemble bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          bundle="wiki-arm64-offline"
+          mkdir -p "$bundle/images"
+          cp deploy/offline/compose.yaml "$bundle/compose.yaml"
+          cp deploy/offline/install.sh "$bundle/install.sh"
+          cp deploy/offline/README.txt "$bundle/README.txt"
+          cp .env.example "$bundle/.env.example"
+          cp /tmp/team-wiki-arm64.tar "$bundle/images/"
+          cp /tmp/team-wiki-compiler-arm64.tar "$bundle/images/"
+          chmod +x "$bundle/install.sh"
+          tar -czf "${bundle}-${GITHUB_SHA::7}.tar.gz" "$bundle"
+          sha256sum "${bundle}-${GITHUB_SHA::7}.tar.gz" > "${bundle}-${GITHUB_SHA::7}.tar.gz.sha256"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wiki-arm64-offline
+          path: |
+            wiki-arm64-offline-*.tar.gz
+            wiki-arm64-offline-*.tar.gz.sha256
+          retention-days: 7
+          compression-level: 0
