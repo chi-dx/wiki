@@ -1,0 +1,5 @@
+[
+  {"evidence_id": "external:sve-guide", "source_type": "external", "source_name": "模拟跨团队资料库", "title": "SVE 实验的补充检查项", "url": "/reference/sve-guide", "text": "虚构外部资料：SVE实验应按目标硬件和编译器版本记录构建参数。除核心循环外，还要检查数据准备、结果收集与标量回退的开销。该资料是接口演示内容，不能代替真实平台文档。", "updated_at": "2026-09-13", "fictional": true},
+  {"evidence_id": "external:benchmark", "source_type": "external", "source_name": "模拟跨团队资料库", "title": "性能测试结果的可比性", "url": "/reference/benchmark", "text": "虚构外部资料：对比性能测试结果时，核对数据集、并发量、绑核、NUMA分配和预热策略。分别保存每轮数据及分布，而非仅记录平均值。环境不一致时应说明限制，不直接宣称优化收益。", "updated_at": "2026-09-12", "fictional": true},
+  {"evidence_id": "external:profiling", "source_type": "external", "source_name": "模拟跨团队资料库", "title": "火焰图之外的等待时间", "url": "/reference/profiling", "text": "虚构外部资料：CPU火焰图展示采样期间的CPU执行分布，等待I/O或锁的时间可能需要其他观测手段。排查延迟时，将CPU采样与请求时间线、等待事件结合，避免把所有慢请求归因于CPU热点。", "updated_at": "2026-09-11", "fictional": true}
+]

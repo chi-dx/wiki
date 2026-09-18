@@ -1,0 +1,19 @@
+.answer-text { white-space: normal; line-height: 1.8; }
+.answer-text > :first-child { margin-top: 0; }
+.answer-text > :last-child { margin-bottom: 0; }
+.answer-text h1, .answer-text h2, .answer-text h3, .answer-text h4 { margin: 1.3em 0 .6em; line-height: 1.4; }
+.answer-text h1 { font-size: 1.5em; }
+.answer-text h2 { font-size: 1.3em; }
+.answer-text h3, .answer-text h4 { font-size: 1.1em; }
+.answer-text p, .answer-text ul, .answer-text ol { margin: .7em 0; }
+.answer-text ul, .answer-text ol { padding-left: 1.7em; }
+.answer-text li + li { margin-top: .3em; }
+.answer-text blockquote { margin: 1em 0; padding: .2em 1em; border-left: 3px solid #aab8ce; background: #f4f7fb; color: #526079; }
+.answer-text code { padding: .15em .35em; border-radius: 4px; background: #eef2f7; font-family: Consolas, monospace; font-size: .9em; }
+.answer-text pre { padding: 1em; overflow-x: auto; white-space: pre; background: #f4f7fb; border: 1px solid #dce3ed; border-radius: 8px; line-height: 1.6; }
+.answer-text pre code { padding: 0; background: none; }
+.answer-text table { display: block; max-width: 100%; overflow-x: auto; border-collapse: collapse; margin: 1em 0; }
+.answer-text th, .answer-text td { padding: .6em .9em; border: 1px solid #dce3ed; text-align: left; min-width: 90px; }
+.answer-text th { background: #f4f7fb; }
+.answer-text a { text-decoration: underline; text-underline-offset: 3px; }
+.answer-text hr { border: 0; border-top: 1px solid #dce3ed; margin: 1.4em 0; }

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="团队技术知识库：检索实践、方法和案例，查看可追溯的资料来源。">
+  <title>技术知识库 · 团队工作台</title>
+  <link rel="stylesheet" href="/static/style.css"><link rel="stylesheet" href="/static/portal.css?v=1"><link rel="stylesheet" href="/static/kunpeng.css?v=5"><link rel="stylesheet" href="/static/markdown.css?v=1"><script src="/static/app.js?v=5" defer></script>
+</head>
+<body>
+  <div class="workspace">
+    <header class="topbar"><a class="brand" href="/"><img src="/static/kunpeng-mark.svg" alt=""><span>鲲鹏知识库</span></a><nav aria-label="主导航"><a href="#library">文档中心</a><a href="/dashboard">看板</a></nav></header>
+    <main>
+      <div class="page-heading">
+        <img class="kunpeng-logo" src="/static/kunpeng-mark.svg" alt="鲲鹏">
+        <h1>鲲鹏知识库</h1>
+      </div>
+      <section class="search-panel" id="search" aria-label="检索问答">
+        <form id="ask-form">
+          <label for="question" class="sr-only">描述你的技术问题</label>
+          <div class="search-row"><span class="search-icon" aria-hidden="true">⌕</span><input id="question" name="question" required minlength="2" maxlength="1000" placeholder="例如：性能测试数据波动大，应该先检查什么？" autocomplete="off"><button class="primary" id="ask-button" type="submit"><span class="button-label">搜索知识</span><span aria-hidden="true">↗</span></button></div>
+          <div class="search-options"><label><input type="checkbox" id="external"> 海问思答</label><span>单次问答 · 关键结论附来源</span></div>
+        </form>
+        <div class="suggestions"><span>试试这些问题</span><button type="button" data-query="SVE 向量化如何验证？">SVE 向量化验证</button><button type="button" data-query="perf 火焰图如何分析热点？">火焰图热点分析</button><button type="button" data-query="性能测试数据波动应该如何排查？">性能数据波动</button></div>
+      </section>
+      <p class="demo-note" id="demo-notice">正在加载知识库…</p>
+      <p id="error" class="error" role="alert" hidden></p>
+      <section id="answer-panel" class="answer-panel" aria-label="问答结果" hidden>
+        <div class="section-heading"><h2>检索结果</h2><span id="answer-mode" class="pill"></span></div>
+        <p id="source-status" class="muted"></p><p id="answer-fictional" class="notice" hidden>本次引用包含虚构演示资料，不代表真实团队验证结果。</p>
+        <div id="answer" class="answer-text" aria-live="polite"></div>
+        <h3>引用与原文</h3><div id="evidence" class="evidence-grid"></div>
+        <section class="keyword-section" aria-labelledby="keyword-title"><div class="keyword-heading"><h3 id="keyword-title">关键词检索结果</h3><span id="keyword-count"></span></div><div id="keyword-results" class="keyword-results"></div></section>
+        <form id="feedback" class="feedback"><div class="feedback-heading"><strong>是否解决了你的问题？</strong><button id="dismiss-feedback" type="button" class="text-button" aria-label="关闭反馈提示">关闭</button></div><div class="feedback-actions"><button type="button" data-solved="true">已解决</button><button type="button" data-solved="false">未解决</button><span id="feedback-status" role="status"></span></div><div id="feedback-detail" hidden><label for="reason">补充原因（选填）</label><input id="reason" maxlength="1000" placeholder="例如：资料不相关、回答不准确或资料过期"><button class="primary" type="submit">提交反馈</button></div></form>
+      </section>
+      <section class="library" id="library" aria-label="知识文档">
+        <div class="section-heading"><div><p class="eyebrow">THE LIBRARY</p><h2 id="library-title">浏览知识库</h2></div><div class="library-meta"><span><strong id="count">—</strong> 篇文档</span><span id="sync-status" class="muted"></span></div></div>
+        <nav id="categories" aria-label="文档分类"><button class="nav-item active" data-category="all">全部知识 <span>—</span></button></nav>
+        <div id="documents" class="document-grid"></div><p id="empty" hidden class="muted">这个分类还没有文档。</p>
+      </section>
+      <footer>团队知识库 <span>每个结论，都有出处可循。</span></footer>
+    </main>
+  </div>
+</body>
+</html>

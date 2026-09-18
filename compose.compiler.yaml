@@ -1,0 +1,31 @@
+# docker compose -f compose.yaml -f compose.compiler.yaml up -d --build
+services:
+  compiler:
+    build:
+      context: .
+      dockerfile: compiler-service/Dockerfile
+    env_file: .env
+    environment:
+      COMPILER_HOST: 0.0.0.0
+      COMPILER_ROOT: /compiler-data
+    volumes:
+      - compiler-data:/compiler-data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:8010/health').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+  web:
+    environment:
+      KNOWLEDGE_BACKEND: compiler
+      COMPILER_URL: http://compiler:8010
+    depends_on:
+      compiler:
+        condition: service_healthy
+  sync:
+    environment:
+      KNOWLEDGE_BACKEND: compiler
+      COMPILER_URL: http://compiler:8010
+volumes:
+  compiler-data:

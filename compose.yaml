@@ -1,0 +1,32 @@
+services:
+  web:
+    build: .
+    image: team-wiki:local
+    env_file: .env
+    environment:
+      DATA_DIR: /data
+    ports:
+      - "8000:8000"
+    volumes:
+      - wiki-data:/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "/app/.venv/bin/python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health/live', timeout=3)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+  sync:
+    image: team-wiki:local
+    build: .
+    command: ["/app/.venv/bin/python", "-m", "app.sync"]
+    env_file: .env
+    environment:
+      DATA_DIR: /data
+    volumes:
+      - wiki-data:/data
+    restart: unless-stopped
+    depends_on:
+      web:
+        condition: service_healthy
+volumes:
+  wiki-data:

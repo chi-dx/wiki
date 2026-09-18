@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="鲲鹏大数据组件性能竞争力全景看板">
+  <title>大数据全景看板 · 鲲鹏知识库</title>
+  <link rel="stylesheet" href="/static/dashboard.css?v=2"><link rel="stylesheet" href="/static/dashboard-tabs.css?v=5">
+  <script src="/static/dashboard.js?v=5" defer></script>
+</head>
+<body>
+  <header class="board-nav">
+    <a class="board-brand" href="/"><img src="/static/kunpeng-mark.svg" alt=""><span>鲲鹏知识库</span></a>
+    <nav><a href="/#library">文档中心</a><a class="active" href="/dashboard">看板</a></nav>
+  </header>
+  <main>
+    <section class="board-head">
+      <div><p>BIG DATA LANDSCAPE</p><h1>大数据组件全景看板</h1><span>悬停查看竞争力，点击组件查看详细指标</span></div>
+      <div class="board-summary"><span><b>18</b> 个组件</span><span><b>4</b> 个技术层</span><span><b>8.7</b> 综合竞争力</span></div>
+    </section>
+    <nav class="domain-tabs" aria-label="技术领域">
+      <a class="active" href="/dashboard" aria-current="page"><span>01</span>大数据</a>
+      <span><i>02</i>数据库<small>规划中</small></span>
+      <span><i>03</i>人工智能<small>规划中</small></span>
+      <span><i>04</i>云原生<small>规划中</small></span>
+    </nav>
+    <div class="performance-legend" aria-label="竞争力标识"><span>竞争力标识</span><i class="leading">领先</i><i class="advantage">优势</i><i class="even">持平</i><i class="weak">劣势</i></div>
+    <p class="demo-banner">演示看板 · 以下组件表现及性能数据均为虚构内容，仅用于界面验证</p>
+    <section class="landscape-shell">
+      <div class="landscape" id="landscape" aria-label="大数据组件全景图"></div>
+      <section class="detail" id="detail" aria-live="polite">
+        <div class="detail-empty"><span>＋</span><p>选择一个组件</p><small>查看性能竞争力与关键指标</small></div>
+      </section>
+    </section>
+    <footer><span>数据口径：鲲鹏参考环境（演示）</span><span>更新时间：2026-09-17</span></footer>
+  </main>
+</body>
+</html>
